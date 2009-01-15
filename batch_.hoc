@@ -6,7 +6,9 @@
 // when running loadfiles on this, need to edit nrnoc.hoc to remove 
 // conditional: if (xwindows) ... else ...
 
-load_file("stdgui.hoc")
+// obsolete load_file("stdgui.hoc")
+load_file("nrngui.hoc")
+
 {graph_flag=0 xwindows=0 batch_flag=1}
 //================================================================
 // INSERTED /usr/site/nrniv/local/hoc/setup.hoc
@@ -540,9 +542,9 @@ proc errorMsg() {
   if (numarg() == 0) {
       printf("ERROR in errorMsg(): Needs at least 1 argument.\n")
     } else if (numarg() == 1) {
-      printf("ERROR: %s in section %s.\n", $s1, section)
+      printf("INFO: %s in section %s.\n", $s1, section)
     } else {
-      printf("ERROR: %s in section %s (var=%g).\n", $s1, section, $2)
+      printf("INFORMATION: %s in section %s (var=%g).\n", $s1, section, $2)
     }
   }
 
@@ -10341,8 +10343,11 @@ gg()
 g.addvar("TI.soma.v(0.5)")
 
 {printf("cvode_active().cvode_local() = %.1f\n",cvode_status())}
-run()
-g.exec_menu("View = plot")
+
+xpanel("run the model")
+xbutton("click here to run","{run() g.exec_menu(\"View = plot\")}")
+xpanel()
+
 // END run.hoc
 //================================================================
 // END batch.hoc
