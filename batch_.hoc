@@ -25,13 +25,18 @@ proc chop () { sfunc.left($s1,sfunc.len($s1)-1) }
 tmpfile = new File()
 simname = "sim"      // helpful if running multiple simulations simultaneously
 runnum = 1           // updated at end of run
-system("uname -m",uname)  // keep track of type of machine for byte compatibility
-chop(uname)
-system("date +%y%b%d",datestr)
-chop(datestr) // may prefer to downcase later
-sprint(output_file,"data/%s.%02d",datestr,runnum)  // assumes a subdir called data
 if (unix_mac_pc()==1) osname = "Linux" else if (unix_mac_pc()==2) { 
     osname = "Mac" } else if (unix_mac_pc()==3) osname = "PC"
+if (!strcmp(osname,"PC")) {
+     uname="PC"
+     datestr="ouput" // substitute for date on PC
+ } else {
+	system("uname -m",uname)  // keep track of type of machine for byte compatibility
+	chop(uname)
+	system("date +%y%b%d",datestr)
+	chop(datestr) // may prefer to downcase later
+}
+sprint(output_file,"data/%s.%02d",datestr,runnum)  // assumes a subdir called data
 printStep = 0.25 // time interval for saving to vector
 graph_flag=0
 batch_flag=1
@@ -10095,7 +10100,8 @@ endtemplate sPYR
 // INSERTED network.hoc
 // =Id=  network.hoc,v 1.281 2009/01/13 15:52:27 billl Exp 
 
-rcsopen("labels.hoc,2,geom.hoc,32")
+// unnecessary:?
+// rcsopen("labels.hoc,2,geom.hoc,32")
 //* Create cells
 
 //* param settings
