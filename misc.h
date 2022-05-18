@@ -70,17 +70,15 @@ extern double mcell_ran4();
 extern int nrn_mlh_gsort();
 extern int ivoc_list_count(Object*);
 extern Object* ivoc_list_item(Object*, int);
-extern int list_vector_px2();
 extern int hoc_is_double_arg(int narg);
 extern Symbol *hoc_get_symbol(char *);
 extern Symbol *hoc_lookup(const char*);
 extern Point_process* ob2pntproc(Object*);
+extern int IsList (Object* p);
 
 extern char* hoc_object_name(Object*);
-extern int cmpdfn();
+extern int cmpdfn(double a, double b);
 extern int openvec(int, double **);
-int list_vector_px();
-double *list_vector_resize();
 static void hxe() { hoc_execerror("",0); }
 extern void FreeListVec(ListVec** pp);
 extern ListVec* AllocListVec(Object* p);
