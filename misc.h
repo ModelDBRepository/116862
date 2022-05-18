@@ -69,12 +69,18 @@ extern void set_seed();
 extern double mcell_ran4();
 extern int nrn_mlh_gsort();
 extern int ivoc_list_count(Object*);
-extern Object* ivoc_list_item(Object*, int);
 extern int hoc_is_double_arg(int narg);
-extern Symbol *hoc_get_symbol(char *);
 extern Symbol *hoc_lookup(const char*);
 extern Point_process* ob2pntproc(Object*);
 extern int IsList (Object* p);
+#ifdef __cplusplus
+extern "C" {
+#endif
+Object* ivoc_list_item(Object*, int);
+Symbol* hoc_get_symbol(const char* var);
+#ifdef __cplusplus
+}
+#endif
 
 extern char* hoc_object_name(Object*);
 extern int cmpdfn(double a, double b);
