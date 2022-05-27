@@ -4,7 +4,7 @@
 #include <math.h>
 #include <limits.h> /* contains LONG_MAX */
 #include <time.h>
-#include <sys/time.h> 
+#include <sys/time.h>
 // #include <values.h>
 #include <pthread.h>
 
@@ -43,11 +43,12 @@ typedef	unsigned char	ui1;	/* one byte unsigned integer */
 typedef	char		si1;	/* one byte signed integer */
 typedef unsigned short	ui2;	/* two byte unsigned integer */
 typedef short		si2;	/* two byte signed integer */
-typedef unsigned int	ui4;	/* four byte unsigned integer */ 
-typedef int		si4;	/* four byte signed integer */ 
-typedef float		sf4;	/* four byte signed floating point number */ 
-typedef double		sf8;	/* eight byte signed floating point number */ 
+typedef unsigned int	ui4;	/* four byte unsigned integer */
+typedef int		si4;	/* four byte signed integer */
+typedef float		sf4;	/* four byte signed floating point number */
+typedef double		sf8;	/* eight byte signed floating point number */
 
+#ifndef NRN_VERSION_GTEQ_8_2_0
 extern double *vector_newsize();
 extern unsigned int scrsz;
 extern unsigned int *scr;
@@ -69,25 +70,22 @@ extern void set_seed();
 extern double mcell_ran4();
 extern int nrn_mlh_gsort();
 extern int ivoc_list_count(Object*);
-extern Object* ivoc_list_item(Object*, int);
-extern int list_vector_px2();
 extern int hoc_is_double_arg(int narg);
-extern Symbol *hoc_get_symbol(char *);
 extern Symbol *hoc_lookup(const char*);
 extern Point_process* ob2pntproc(Object*);
-
+Object* ivoc_list_item(Object*, int);
+Symbol* hoc_get_symbol(const char* var);
 extern char* hoc_object_name(Object*);
-extern int cmpdfn();
-extern int openvec(int, double **);
-int list_vector_px();
-double *list_vector_resize();
-static void hxe() { hoc_execerror("",0); }
-extern void FreeListVec(ListVec** pp);
-extern ListVec* AllocListVec(Object* p);
-extern ListVec* AllocILV(Object*, int, double *);
+extern int cmpdfn(double a, double b);
 void FillListVec(ListVec* p,double dval);
 extern short *nrn_artcell_qindex_;
 extern double nrn_event_queue_stats(double*);
 extern void clear_event_queue();
-
+#endif
+extern ListVec* AllocILV(Object*, int, double *);
+extern ListVec* AllocListVec(Object* p);
+extern void FreeListVec(ListVec** pp);
+static void hxe() { hoc_execerror("",0); }
+extern int IsList (Object* p);
+extern int openvec(int, double **);
 static double sc[6];

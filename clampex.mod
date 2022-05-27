@@ -10,6 +10,9 @@ ASSIGNED {
 
 VERBATIM
 extern double chkarg();
+#ifndef NRN_VERSION_GTEQ_8_2_0
+double *hoc_pgetarg();
+#endif
 
 typedef struct CEXData {
 #if 1
@@ -31,7 +34,7 @@ typedef struct CEXData {
 }CEXData;
 #define CEXD CEXData* cexd = (CEXData*)((unsigned long)pointer);
 	
-static void reverse(b, n ) char* b; int n; {
+static void reverse(char* b, int n) {
 	int i, j, v_;
 	for (i=0, j=n-1; i<j; ++i, --j) {
 		v_ = b[i];
@@ -40,7 +43,7 @@ static void reverse(b, n ) char* b; int n; {
 	}
 }
 
-static void header_endian(h) char* h; {
+static void header_endian(char* h) {
 	char* b;
 	int i;
 	b = h;
@@ -59,7 +62,7 @@ static void header_endian(h) char* h; {
 	}
 }
 
-static double get_parm(i, h) int i; char* h; {
+static double get_parm(int i, char* h) {
 	char* b;
 	float* f;
 	long* n;
@@ -144,7 +147,7 @@ FUNCTION parm() {
 PROCEDURE datavec() {
 	VERBATIM
 	int ntrace, trace, i, length;
-	double* pd, *hoc_pgetarg();
+	double* pd;
 	short* tr;
 	CEXD
 	length = (int)get_parm(3, cexd->header);
